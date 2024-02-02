@@ -40,8 +40,11 @@ def downloadImage(url: str) -> float:
         try:
             response = requests.get(
                 url, headers=headers,
-                proxies=NETWORK_CONFIG["PROXY"],
                 timeout=(4, wait_time))
+            #response = requests.get(
+            #    url, headers=headers,
+            #    proxies=NETWORK_CONFIG["PROXY"],
+            #    timeout=(4, wait_time))
 
             if response.status_code == 200:
                 image_size = int(

@@ -1,10 +1,12 @@
 import datetime
+import os
 
 
 # NOTE: MODE_CONFIG only applies to ranking crawler
 MODE_CONFIG = {
     # start date
-    "START_DATE": datetime.date(2022, 8, 1),
+    "START_DATE": datetime.date.today() - datetime.timedelta(days=1),
+    #"START_DATE": datetime.date(2024, 2, 1),
     # date range: [start, start + range - 1]
     "RANGE": 1,
 
@@ -22,11 +24,11 @@ MODE_CONFIG = {
         "all",  # download both illustrations & mangas
         "illust", "manga"
     ],
-    "CONTENT_MODE": "all",  # choose from the above
+    "CONTENT_MODE": "illust",  # choose from the above
 
     # download top x in each ranking
     #   suggested x be a multiple of 50
-    "N_ARTWORK": 50
+    "N_ARTWORK": 10
 }
 
 OUTPUT_CONFIG = {
@@ -39,7 +41,7 @@ NETWORK_CONFIG = {
     # proxy setting
     #   you should customize your proxy setting accordingly
     #   default is for clash
-    "PROXY": {"https": "127.0.0.1:7890"},
+    #"PROXY": {"https": "127.0.0.1:20171"},
 
     # common request header
     "HEADER": {
@@ -51,16 +53,16 @@ USER_CONFIG = {
     # user id
     #   access your pixiv user profile to find this
     #   e.g. https://www.pixiv.net/users/xxxx
-    "USER_ID": "22821761",
+    "USER_ID": os.getenv("PIXIV_ID")
 
-    "COOKIE": "TODO"
+    "COOKIE": os.getenv("PIXIV_COOKIE")
 }
 
 
 DOWNLOAD_CONFIG = {
     # image save path
     #   NOTE: DO NOT miss "/"
-    "STORE_PATH": "images/",
+    "STORE_PATH": "./images/",
 
     # abort request / download
     #   after 10 unsuccessful attempts
