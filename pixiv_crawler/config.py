@@ -53,7 +53,7 @@ USER_CONFIG = {
     # user id
     #   access your pixiv user profile to find this
     #   e.g. https://www.pixiv.net/users/xxxx
-    "USER_ID": os.getenv("PIXIV_ID")
+    "USER_ID": os.getenv("PIXIV_ID"),
 
     "COOKIE": os.getenv("PIXIV_COOKIE")
 }
