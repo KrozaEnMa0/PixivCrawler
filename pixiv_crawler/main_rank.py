@@ -14,7 +14,7 @@ if __name__ == "__main__":
 #    # case 1: (need cookie !!!)
 #    #   download artworks from rankings
 #    #   the only parameter is flow capacity, default is 1024MB
-    app = RankingCrawler(capacity=os.getenv("CAPACITY"))
+    app = RankingCrawler(capacity=int(os.getenv("CAPACITY")))
     app.run()
 
 #    # case 2: (need cookie !!!)

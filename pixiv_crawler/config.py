@@ -28,7 +28,7 @@ MODE_CONFIG = {
 
     # download top x in each ranking
     #   suggested x be a multiple of 50
-    "N_ARTWORK": os.getenv("NUMBER")
+    "N_ARTWORK": int(os.getenv("NUMBER"))
 }
 
 OUTPUT_CONFIG = {
