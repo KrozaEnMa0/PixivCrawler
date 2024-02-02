@@ -28,7 +28,7 @@ MODE_CONFIG = {
 
     # download top x in each ranking
     #   suggested x be a multiple of 50
-    "N_ARTWORK": 10
+    "N_ARTWORK": os.getenv("NUMBER")
 }
 
 OUTPUT_CONFIG = {
@@ -75,7 +75,7 @@ DOWNLOAD_CONFIG = {
     "FAIL_DELAY": 1,
 
     # max parallel thread number
-    "N_THREAD": 12,
+    "N_THREAD": 32,
     # waiting time (s) after thread start
     "THREAD_DELAY": 1,
 }

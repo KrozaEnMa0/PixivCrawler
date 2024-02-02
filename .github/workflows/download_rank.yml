@@ -11,7 +11,7 @@ on:
       CAPACITY:
         type: string
         description: 下载大小限制(MB)
-        default: '200'
+        default: '1024'
         required: true
       
 jobs:
@@ -41,7 +41,7 @@ jobs:
         continue-on-error: false
         run: |
           cd ./pixiv_crawler/
-          python main.py
+          python main_rank.py
 
       - name: Compress File
         run: |
