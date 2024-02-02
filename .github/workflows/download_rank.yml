@@ -1,0 +1,59 @@
+name: 下载JM本子(dispatch)
+
+on:
+  workflow_dispatch:
+    inputs:
+      NUMBER:
+        type: string
+        description: 下载插画数量
+        default: '50'
+        required: true
+      CAPACITY:
+        type: string
+        description: 下载大小限制(MB)
+        default: '200'
+        required: true
+      
+jobs:
+  crawler:
+    runs-on: ubuntu-latest
+    env:
+      # input
+      NUMBER: ${{ github.event.inputs.NUMBER }}
+      CAPACITY: ${{ github.event.inputs.CAPACITY }}
+      # sccrets
+      PIXIV_ID: ${{ secrets.PIXIV_ID }}
+      PIXIV_COOKIE: ${{ secrets.PIXIV_COOKIE }}
+
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.11"
+
+      - name: Install Dependency
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements-dev.txt
+
+      - name: Downloading
+        continue-on-error: false
+        run: |
+          cd ./pixiv_crawler/
+          python main.py
+
+      - name: Compress File
+        run: |
+          sudo apt-get install p7zip -y
+          cd ./pixiv_crawler/images
+          7z a "../illust.7z" -p0721 ./
+          mv "../illust.7z" ./
+
+      - name: Upload File
+        uses: actions/upload-artifact@v3
+        with:
+          name: illust
+          path: ./pixiv_crawler/images/illust.7z
+          if-no-files-found: error
+          retention-days: 90
