@@ -1,17 +1,22 @@
-name: 下载昨日日榜
+name: 下载某画师的插画
 
 on:
   workflow_dispatch:
     inputs:
+      ID:
+        type: string
+        description: 画师ID
+        default: ''
+        required: true
       NUMBER:
         type: string
         description: 下载插画数量
-        default: '50'
+        default: '100'
         required: true
       CAPACITY:
         type: string
         description: 下载大小限制(MB)
-        default: '1024'
+        default: '2048'
         required: true
       
 jobs:
@@ -19,6 +24,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       # input
+      ID: ${{ github.event.inputs.ID }}
       NUMBER: ${{ github.event.inputs.NUMBER }}
       CAPACITY: ${{ github.event.inputs.CAPACITY }}
       # sccrets
@@ -41,12 +47,12 @@ jobs:
         continue-on-error: false
         run: |
           cd ./pixiv_crawler/
-          python main_rank.py
+          python main_user.py
 
       - name: Upload File
         uses: actions/upload-artifact@v3
         with:
-          name: illust
+          name: user_${{ github.event.inputs.ID }}
           path: ./pixiv_crawler/images/
           if-no-files-found: error
           retention-days: 90
