@@ -27,8 +27,10 @@ if __name__ == "__main__":
     # case 3: (need cookie for R18 images !!!)
     #   download artworks from a single artist
     #   2nd parameter is flow capacity, default is 1024MB
-    app = UserCrawler(artist_id=os.getenv("ID"), capacity=int(os.getenv("CAPACITY")))
-    app.run()
+    get_url = os.getenv("ID").split(',')
+    for url_line in get_url:
+        app = UserCrawler(artist_id=url_line, capacity=10240)
+        app.run()
 #
 #    # case 4: (need premium & cookie !!!)
 #    #   download search results of a keyword (sorted by popularity if order=True)
