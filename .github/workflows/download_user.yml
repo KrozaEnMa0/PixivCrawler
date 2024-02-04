@@ -49,6 +49,11 @@ jobs:
           cd ./pixiv_crawler/
           python main_user.py
 
+      - name: ls file
+        run: |
+          cd ./pixiv_crawler/images/
+          ls
+
       - name: Upload File
         uses: actions/upload-artifact@v3
         with:
