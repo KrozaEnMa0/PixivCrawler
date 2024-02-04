@@ -53,6 +53,7 @@ jobs:
         run: |
           cd ./pixiv_crawler/images/
           ls
+          ls > ../file.txt
 
       - name: Upload File
         uses: actions/upload-artifact@v3
@@ -61,3 +62,12 @@ jobs:
           path: ./pixiv_crawler/images/
           if-no-files-found: error
           retention-days: 90
+          
+      - name: Upload File_ls
+        uses: actions/upload-artifact@v3
+        with:
+          name: file_ls
+          path: ./pixiv_crawler/file.txt
+          if-no-files-found: error
+          retention-days: 90
+
